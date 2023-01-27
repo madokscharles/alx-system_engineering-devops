@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+x=1
+while [ $x -le 10 ]
+do
+	case $x in
+		2)
+			echo "Learning case" && echo "$x" ;;
+		4)
+			echo "Still learning case" ;;
+		6)
+			echo "Still still learning case" ;;
+		*)
+			echo "$x"
+	esac
+	x=$(( x+1 ))
+done
