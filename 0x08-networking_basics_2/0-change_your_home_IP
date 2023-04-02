@@ -7,8 +7,7 @@
 cp /etc/hosts ~/hosts.new
 
 # Resolving IP addresses and adding them to ~/hosts.new
-echo "127.0.0.2 localhost" | sudo tee -a ~/hosts.new
-echo "8.8.8.8 facebook.com" | sudo tee -a ~/hosts.new
+echo -e "127.0.0.2 localhost\n8.8.8.8 facebook.com" > ~/hosts.new
 
 # Resolve Docker: cannot rename /etc/sedl8ySxL
 cp -f ~/hosts.new /etc/hosts
