@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Script configures Nginx server cat etc/nginx/sites-enabled/default
+
+sudo apt-get update
+sudo apt-get -y install nginx
+
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+to_replace="server_name _;\n\trewrite ^\/redirect_me https:\/\/codesinpink.hashnode.dev permanent;"
+sudo sed -i "s/server_name _;/$to_replace/" /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
