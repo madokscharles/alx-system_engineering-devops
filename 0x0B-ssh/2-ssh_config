@@ -1,0 +1,8 @@
+# Configure SSH 
+# find file in /etc/ssh/ssh_config
+
+IdentityFile ~/.ssh/school
+PasswordAuthentication no
+SendEnv LANG LC_*
+HashKnownHosts yes
+GSSAPIAuthentication yes
