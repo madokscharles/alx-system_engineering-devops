@@ -14,7 +14,7 @@ frontend  haproxynode
         default_backend backendnodes
 backend backendnodes
         balance roundrobin
-        server 151805-web-01 54.164.90.225:80 check
+        server 151805-web-01 52.91.182.106:80 check
         server 151805-web-02 35.174.209.196:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
