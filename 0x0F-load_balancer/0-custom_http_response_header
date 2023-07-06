@@ -6,16 +6,16 @@ sudo apt-get update
 sudo apt-get -y install nginx
 
 sudo ufw allow 'Nginx HTTP'
+
 sudo mkdir -p /var/www/html
 
 sudo chmod -R 755 /var/www
-echo 'Hello World!' |sudo tee  /var/www/html/index.html
 
-echo "Ceci n'est pas une page" |sudo tee /var/www/html/404.html
-for_replace="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me http:\/\/konoma.tech permanent;"
-sudo sed -i "s/server_name _;/$for_replace/" /etc/nginx/sites-enabled/default
+sudo echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+sudo echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
 
-for_replace="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-sudo sed -i "s/listen 80 default_server;/$for_replace/" /etc/nginx/sites-enabled/default
+sudo sed -i "/^\sserver_name.*/a\ \trewrite ^\/redirect_me http:\/\/konoma.tech permanent;" /etc/nginx/sites-available/default
+sudo sed -i "/^\slocation.*/i\ \terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t}\n" /etc/nginx/sites-available/default
+sudo sed -i "/^\slocation \/ {/i\ \tadd_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default
 
 sudo service nginx restart
