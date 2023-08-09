@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ Uses REST API to return information about a given employee ID """
 
+import csv
 import requests
 import sys
-import csv
 
 
 if __name__ == "__main__":
