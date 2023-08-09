@@ -7,29 +7,29 @@ import csv
 
 
 if __name__ == "__main__":
-    employeeID = sys.argv[1]
+    user_id = sys.argv[1]
     url = "https://jsonplaceholder.typicode.com/"
-
-    user = "{}users/{}".format(url, employeeID)
+    user = '{}users/{}'.format(url, user_id)
     response = requests.get(user)
-    tasks = response.json()
-    name = tasks.get('username')
+    username = response.json().get('username')
 
-    todos = "{}todos?userId={}".format(url, employeeID)
+    todos = todos = '{}todos?userId={}'.format(url, user_id)
     response = requests.get(todos)
     tasks = response.json()
     done_tasks = []
 
     for task in tasks:
-        done_tasks.append([employeeID, name,
-                            task.get('completed'),
-                            task.get('title')])
+        done_tasks.append([user_id,
+                       username,
+                       task.get('completed'),
+                       task.get('title')])
 
-    filename = '{}.csv'.format(employeeID)
+    filename = '{}.csv'.format(user_id)
+
     with open(filename, mode='w') as employee_file:
         employee_writer = csv.writer(employee_file,
-                                        delimiter=',',
-                                        quotechar='"',
-                                        quoting=csv.QUOTE_ALL)
+                                     delimiter=',',
+                                     quotechar='"',
+                                     quoting=csv.QUOTE_ALL)
         for task in done_tasks:
             employee_writer.writerow(task)
