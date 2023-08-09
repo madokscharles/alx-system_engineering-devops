@@ -20,9 +20,9 @@ if __name__ == "__main__":
 
     for task in tasks:
         done_tasks.append([user_id,
-                       username,
-                       task.get('completed'),
-                       task.get('title')])
+                          username,
+                          task.get('completed'),
+                          task.get('title')])
 
     filename = '{}.csv'.format(user_id)
 
